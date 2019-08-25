@@ -2,6 +2,9 @@
 #include<string>
 using namespace std;
 
+//#define INHERITANCE
+#define POLYMORPHISM
+
 class Human
 {
 protected:
@@ -41,12 +44,12 @@ public:
 		set_age(age);
 		cout << "HConstructor:\t" << this << endl;
 	}
-	~Human()
+	virtual ~Human()
 	{
 		cout << "HDestructor:\t" << this << endl;
 	}
 
-	void info()
+	virtual void info()
 	{
 		cout << last_name << " " << first_name << ", " << age << " лет.\n";
 	}
@@ -147,8 +150,9 @@ public:
 void main()
 {
 	setlocale(LC_ALL, "");
+#ifdef INHERITANCE
 	/*Human h("Тупенко", "Василий", 18);
-	h.info();*/
+h.info();*/
 
 	Student s("Тупенко", "Василий", 18, "РПО", "ПС ВС ПУ 34", 50);
 	s.info();
@@ -156,4 +160,35 @@ void main()
 	Teacher albert("Einstein", "Albert", 150, "Astronomy", 5);
 	albert.info();
 	cout << "\n----------------------------------------\n";
+
+	Human* ps = &s;		//pointer to student
+	Human* pt = &albert;//pointer to teacher
+	ps->info();
+	pt->info();
+#endif // INHERITANCE
+
+	//UpCast
+	Human* group[] = 
+	{
+		new Student("Дурко", "Василий", 18, "РПО", "ПС ВС ПУ 34", 20),
+		new Student("Тупенко", "Иван", 18, "РПО", "ПС ВС ПУ 34", 12),
+		new Student("Линтяюга", "Варвара", 18, "РПО", "ПС ВС ПУ 34", 25),
+		new Teacher("Головко", "Наталия", 50, "С++", 99),
+		new Student("Матюкливий", "Андрей", 16, "РПО", "ПС ВС ПУ 34", 33),
+		new Teacher("Шипка", "Тамара", 60, "СУБД", 2)
+	};
+
+	cout << "\n--------------------------\n";
+	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+	{
+		group[i]->info();
+		cout << "\n--------------------------\n";
+	}
+
+	//DownCast
+
+	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+	{
+		delete group[i];
+	}
 }
