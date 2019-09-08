@@ -147,6 +147,32 @@ public:
 	}
 };
 
+class Graduate :public Student
+{
+	string diploma_theme;
+public:
+	Graduate
+	(
+		const string& last_name, const string& first_name, unsigned int age,
+		const string& specialty, const string& group, unsigned int rating,
+		const string& diploma_theme
+	) :Student(last_name, first_name, age, specialty, group, rating)
+	{
+		this->diploma_theme = diploma_theme;
+		cout << "GConstructor:\t" << this << endl;
+	}
+	~Graduate()
+	{
+		cout << "GDestructor:\t" << this << endl;
+	}
+
+	void info()
+	{
+		Student::info();
+		cout << "Тема дипломного проекта: " << diploma_theme << endl;
+	}
+};
+
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -175,7 +201,8 @@ h.info();*/
 		new Student("Линтяюга", "Варвара", 18, "РПО", "ПС ВС ПУ 34", 25),
 		new Teacher("Головко", "Наталия", 50, "С++", 99),
 		new Student("Матюкливий", "Андрей", 16, "РПО", "ПС ВС ПУ 34", 33),
-		new Teacher("Шипка", "Тамара", 60, "СУБД", 2)
+		new Teacher("Шипка", "Тамара", 60, "СУБД", 2),
+		new Graduate("Батраченко", "Антон", 17, "РПО", "ПС ВС ПУ 34", 98, "Разработка искуственного интеллекта")
 	};
 
 	cout << "\n--------------------------\n";
