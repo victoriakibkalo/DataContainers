@@ -1,4 +1,12 @@
 TODO:
+CopyConstructor;
+CopyAssignment;
+MoveConstructor;
+MoveAssignment;
+Кроме этого, проверрочный код в проекте ForwardList должен заработать:
+
+
+DONE:
 В класс ForwardList добавить методы:
 push_back(???)	- добавляет элемент в конец списка;
 pop_front(???)	- удаляет элемент с начала списка;
