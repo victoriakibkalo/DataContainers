@@ -50,6 +50,23 @@ public:
 		while (size--)push_front(0);
 
 	}
+	List(initializer_list<int> il):List()
+	{
+		//cout << typeid(il.begin()).name() << endl;
+		for (int const* it = il.begin(); it != il.end(); it++)
+		{
+			push_back(*it);
+		}
+	}
+	List(const List& other) :List()
+	{
+		for (Element* Temp = other.Head; Temp != nullptr; Temp = Temp->pNext)
+		{
+			push_back(Temp->Data);
+		}
+		cout << "CopyConstructor:\t" << this << endl;
+	}
+
 	~List()
 	{
 		while (Head)pop_front();
@@ -57,6 +74,19 @@ public:
 	}
 
 	//			Operators:
+
+	List& operator=(const List& other)
+	{
+		if (this == &other)return *this;
+		while (Head)pop_front();
+		for (Element* Temp = other.Head; Temp != nullptr; Temp = Temp->pNext)
+		{
+			push_back(Temp->Data);
+		}
+		cout << "CopyAssignment:\t" << this << endl;
+		return *this;
+	}
+
 	int& operator[](int Index)
 	{
 		Element* Temp = Head;
@@ -232,11 +262,15 @@ void main()
 
 #ifdef HARDCORE_CHECK
 	List list1 = { 3, 5, 8, 13, 21 };
+	list1 = list1;
 	list1.print();
-	List list2 = { 34, 55, 89 };
-	list2.print();
-	List list3 = list1 + list2;	//Конкатенация списков.
-	list3.print();
+	//List list2 = { 34, 55, 89 };
+	//list2.print();
+	//List list3;
+	//list3 = list1;	//CopyAssignment
+	//list3.print();
+	//List list3 = list1 + list2;	//Конкатенация списков.
+	//list3.print();
 	//http://www.cplusplus.com/reference/initializer_list/initializer_list/
 #endif // HARDCORE_CHECK
 

@@ -3,7 +3,7 @@ CopyConstructor;
 CopyAssignment;
 MoveConstructor;
 MoveAssignment;
-Кроме этого, проверрочный код в проекте ForwardList должен заработать:
+Кроме этого, проверочный код в проекте ForwardList должен заработать:
 
 
 DONE:
